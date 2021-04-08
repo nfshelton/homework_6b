@@ -23,9 +23,9 @@ function ready() {
 			var button = addToCartButtons[i];
 			var button2 = addToCartButtons[i];
 			button.addEventListener("click", addToCartClicked);
+			button.addEventListener("click" , console.log("yupyouvemadeitchild"))
 			button2.addEventListener("click", addNotification);
 		}
-	console.log("in here!")
 	updateCartNoti();
 }
 
@@ -48,12 +48,10 @@ function updateCartNoti() {
 
 	if (noti != null) {
 		document.getElementsByClassName("dot")[0].innerText = noti;
-		console.log("condition1")
 	}
 	else {
 		noti = 0;
 		document.getElementsByClassName("dot")[0].innerText = noti;
-		console.log("condition2")
 	}
 }
 //removing item from the cart when pressing button remove
@@ -77,13 +75,14 @@ function addToCartClicked(event) {
 	var title = shopItem.getElementsByClassName("shop-item-title")[0].innerText;
 	var price = shopItem.getElementsByClassName("shop-item-price")[0].innerText;
 	var imageSrc = shopItem.getElementsByClassName("shop-item-image")[0].src;
+	console.log(title, price, imageSrc);
 	addItemToCart(title, price, imageSrc);
 }
 //adding Item to the cart pt.1
 function addItemToCart(title, price, imageSrc) {
 	var cartRow = document.createElement('div');
 	var cartItems = document.getElementsByClassName("cart-items")[0];
-	
+	console.log("yeah yeah i got here")
 	cartItems.append(cartRow);
 }
 //updating the cart total when item quantity is changed
