@@ -23,7 +23,6 @@ function ready() {
 			var button = addToCartButtons[i];
 			var button2 = addToCartButtons[i];
 			button.addEventListener("click", addToCartClicked);
-			button.addEventListener("click" , console.log("yupyouvemadeitchild"))
 			button2.addEventListener("click", addNotification);
 		}
 	updateCartNoti();
@@ -40,7 +39,6 @@ function addNotification(event) {
 	document.getElementsByClassName("dot")[0].innerText = n;
 	notification = document.getElementsByClassName("dot")[0].innerText;
 	localStorage.setItem("noti", notification);
-	console.log(notification)
 
 }
 function updateCartNoti() {
@@ -68,6 +66,103 @@ function quantityChanged(event){
 	}
 	updateCartTotal();
 }
+//adding Item to the cart pt.1
+function addItemToCart(title, price, imageSrc) {
+	var titles = JSON.parse(localStorage.getItem("titles"));
+	var prices = JSON.parse(localStorage.getItem("prices"));
+	var imageSrcs = JSON.parse(localStorage.getItem("imageSrcs"));
+	if (titles == undefined || titles == null){
+		titles = [];
+	}
+	if (prices == undefined || prices == null){
+		prices = [];
+	}
+	if (imageSrcs == undefined || imageSrcs == null){
+		imageSrcs = [];
+	}
+	titles.push(title);
+	prices.push(price);
+	imageSrcs.push(imageSrc);
+
+	localStorage.setItem("titles", JSON.stringify(titles));
+	localStorage.setItem("prices", JSON.stringify(prices));
+	localStorage.setItem("imageSrcs", JSON.stringify(imageSrcs));
+
+
+	//var cartRow = document.createElement('div');
+	//cartRow.innerText = title;
+	//var cartItems = document.getElementsByClassName("cart-items")[0];
+	//var cartContents = document.getElementsByClassName("cart-contents")[0];
+	//console.log(document.getElementsByClassName("cart-contents")[0]);
+	//console.log("HERE I AM cart items:", cartItems, "CART CONTENTS:", cartContents);
+	//cartItems.append(cartRow);
+	//console.log("yeah yeah i got here")
+
+}
+function loadCart(){
+	var cartDiv = document.getElementsByClassName("cart-contents")[0];
+//	console.log(document.getElementsByClassName("cart-contents")[0]);
+	//console.log("HERE I AM cart items:", cartItems, "CART CONTENTS:", cartContents);
+	//cartItems.append(cartRow);
+	var titles = JSON.parse(localStorage.getItem("titles"));
+	var prices = JSON.parse(localStorage.getItem("prices"));
+	var imageSrcs = JSON.parse(localStorage.getItem("imageSrcs"));
+	if (titles == undefined || titles == null){
+		titles = [];
+	}
+	if (prices == undefined || prices == null){
+		prices = [];
+	}
+	if (imageSrcs == undefined || imageSrcs == null){
+		imageSrcs = [];
+	}
+	for (let i = 0; i < titles.length; i++) {
+		var cartRow = document.createElement('div');
+		cartRow.innerText = titles[i];
+		cartDiv.append(cartRow);
+	}
+	for (let i = 0; i < prices.length; i++) {
+		var cartRow = document.createElement('div');
+		cartRow.innerText = prices[i];
+		cartDiv.append(cartRow);
+	}
+	for (let i = 0; i < imageSrcs.length; i++) {
+		var cartRow = document.createElement('div');
+		cartRow.innerText = titles[i];
+		console.log(cartRow)
+		cartDiv.append(cartRow);
+	}
+
+	var cartRowContents = `
+	<div class="first-cart-row">
+			<div class="item-column">
+				<h3>Item</h3>
+			</div>
+			<div class="item-column">
+				<h3 class="item-title">Accented Green Pillow</h3>
+				<div class="inner-txt">
+					<p id="details-underline">Details</p>
+					<p>Color: Morning Haze</p>
+					<p>Filling: Memory Foam</p>
+					<p>Size: Standard</p>
+				</div>
+			</div>
+			<div class="item-column">
+				<h3>Quantity</h3>
+				<input class="cart-quantity-input" type="number" value="1">
+			</div>
+			<div class="item-column">
+				<div class="price-pt">
+					<h3>Price</h3>
+					<p class="cart-price">$112</p>
+				</div>
+				<button class="remove-button" type="button">REMOVE</button>
+			</div>
+		</div>`
+		cartRow.innerHTML = cartRowContents;
+	//cartRow.setAttribute one is a parameter/value , class should be key and the value is whatever class in 
+	// css code u want it to be image.setAttribute then it would use that style
+}
 //adding Item to the cart pt.2 
 function addToCartClicked(event) {
 	var button = event.target;
@@ -78,16 +173,11 @@ function addToCartClicked(event) {
 	console.log(title, price, imageSrc);
 	addItemToCart(title, price, imageSrc);
 }
-//adding Item to the cart pt.1
-function addItemToCart(title, price, imageSrc) {
-	var cartRow = document.createElement('div');
-	var cartItems = document.getElementsByClassName("cart-items")[0];
-	console.log("yeah yeah i got here")
-	cartItems.append(cartRow);
-}
+
 //updating the cart total when item quantity is changed
 function updateCartTotal(){
-	var cartItemContainer = document.getElementsByClassName("cart-items")[0];
+	var cartItemContainer = document.getElementsByClassName("cart-contents")[0];
+	console.log(document.getElementsByClassName("cart-contents")[0])
 	var cartRows = cartItemContainer.getElementsByClassName("first-cart-row");
 	var total = 0;
 	for (var i = 0; i < cartRows.length; i++) {
