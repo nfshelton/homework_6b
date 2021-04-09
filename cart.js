@@ -133,7 +133,7 @@ function loadCart(){
 		cartRow.innerText = titles[i];
 		cartDiv.append(cartRow);
 	}
-	cartRow.classList.add("first-cart-row")''
+	console.log(titles)
 	var cartRowContents = `
 			<div class="item-column">
 				<h3>Item</h3>
@@ -173,7 +173,6 @@ function loadCart(){
 				<button class="remove-button" type="button">REMOVE</button>
 			</div>`
 	cartRow.innerHTML = cartRowContents;
-	console.log("did cool stuff")
 //	cartRow.setAttribute("class","item-title");
 //	console.log(cartRow.setAttribute("class","item-title"))
 	
