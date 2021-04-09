@@ -68,9 +68,9 @@ function quantityChanged(event){
 }
 //adding Item to the cart pt.1
 function addItemToCart(title, price, imageSrc) {
-	var titles = JSON.parse(localStorage.getItem("titles"));
-	var prices = JSON.parse(localStorage.getItem("prices"));
-	var imageSrcs = JSON.parse(localStorage.getItem("imageSrcs"));
+	var titles = JSON.parse(sessionStorage.getItem("titles"));
+	var prices = JSON.parse(sessionStorage.getItem("prices"));
+	var imageSrcs = JSON.parse(sessionStorage.getItem("imageSrcs"));
 	if (titles == undefined || titles == null){
 		titles = [];
 	}
@@ -84,9 +84,9 @@ function addItemToCart(title, price, imageSrc) {
 	prices.push(price);
 	imageSrcs.push(imageSrc);
 
-	localStorage.setItem("titles", JSON.stringify(titles));
-	localStorage.setItem("prices", JSON.stringify(prices));
-	localStorage.setItem("imageSrcs", JSON.stringify(imageSrcs));
+	sessionStorage.setItem("titles", JSON.stringify(titles));
+	sessionStorage.setItem("prices", JSON.stringify(prices));
+	sessionStorage.setItem("imageSrcs", JSON.stringify(imageSrcs));
 
 
 	//var cartRow = document.createElement('div');
@@ -103,10 +103,11 @@ function loadCart(){
 	var cartDiv = document.getElementsByClassName("cart-contents")[0];
 //	console.log(document.getElementsByClassName("cart-contents")[0]);
 	//console.log("HERE I AM cart items:", cartItems, "CART CONTENTS:", cartContents);
+	
 	//cartItems.append(cartRow);
-	var titles = JSON.parse(localStorage.getItem("titles"));
-	var prices = JSON.parse(localStorage.getItem("prices"));
-	var imageSrcs = JSON.parse(localStorage.getItem("imageSrcs"));
+	var titles = JSON.parse(sessionStorage.getItem("titles"));
+	var prices = JSON.parse(sessionStorage.getItem("prices"));
+	var imageSrcs = JSON.parse(sessionStorage.getItem("imageSrcs"));
 	if (titles == undefined || titles == null){
 		titles = [];
 	}
@@ -134,30 +135,42 @@ function loadCart(){
 	}
 
 	var cartRowContents = `
-	<div class="first-cart-row">
-			<div class="item-column">
+		<div class="item-column">
 				<h3>Item</h3>
+		</div>
+		<img class="image-of-pillow" src="images/item.jpg" alt="pillow choice in cart">
+		<div class="item-column">
+			<h3 class="item-title">Accented Green Pillow</h3>
+			<div class="inner-txt">
+				<p id="details-underline">Details</p>
+				<select class="size-option" name="size" id="size" value="--size--">
+					<option value="standard">Standard</option>
+					<option value="large">Large</option>
+					<option value="xL">Extra Large</option>
+				</select>
+				<select class="pillow stuffing" name="pillow-stuffing" id="pillow-stuffing" value="--pillow stuffing--">
+					<option value="duck-down">Duck Down</option>
+					<option value="hypoallergenic">Hypoallergenic poly-blend</option>
+					<option value="memory-foam">Memory Foam</option>
+				</select>
+				<select class="pillow-color" name="pillow-color" id="pillow-color" value="--color--">
+					<option value="after-school-special">After School Special</option>
+					<option value="morning-haze">Morning Haze</option>
+					<option value="cozy-denim">Cozy Denim</option>
+					<option value="rainy-day">Rainy Day</option>
+				</select>
 			</div>
-			<div class="item-column">
-				<h3 class="item-title">Accented Green Pillow</h3>
-				<div class="inner-txt">
-					<p id="details-underline">Details</p>
-					<p>Color: Morning Haze</p>
-					<p>Filling: Memory Foam</p>
-					<p>Size: Standard</p>
-				</div>
+		</div>
+		<div class="item-column">
+			<h3>Quantity</h3>
+			<input class="cart-quantity-input" type="number" value="1">
+		</div>
+		<div class="item-column">
+			<div class="price-pt">
+				<h3>Price</h3>
+				<p class="cart-price">$112</p>
 			</div>
-			<div class="item-column">
-				<h3>Quantity</h3>
-				<input class="cart-quantity-input" type="number" value="1">
-			</div>
-			<div class="item-column">
-				<div class="price-pt">
-					<h3>Price</h3>
-					<p class="cart-price">$112</p>
-				</div>
-				<button class="remove-button" type="button">REMOVE</button>
-			</div>
+			<button class="remove-button" type="button">REMOVE</button>
 		</div>`
 		cartRow.innerHTML = cartRowContents;
 	//cartRow.setAttribute one is a parameter/value , class should be key and the value is whatever class in 

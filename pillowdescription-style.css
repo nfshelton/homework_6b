@@ -133,18 +133,20 @@ img{
 .item-title{
   padding-left: -16px;
 }
-.pillow-image{
+.image-of-pillow{
   width:12em;
   height:10em;
-  margin-top:18em;
-  margin-left:5em;
+  margin-top:34em;
+  margin-left:-15em;
+  margin-bottom:-32em;
+  
 }
-.pillow-image2{
+/*.pillow-image2{
   width:12em;
   height:10em;
-  margin-top:2em;
+  margin-top:5em;
   margin-left:-11em;
-}
+}*/
 
 .details{
   text-align:left;
